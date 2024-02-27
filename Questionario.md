@@ -21,8 +21,8 @@
 #### (c) Qual é a sintaxe utilizada para criar um novo **target**?
 
    De forma generalizada a sintaxe de um “target” é descrita por:
-   targets: prerequisites
-           	recipe  
+   ###### targets: prerequisites
+   ######          recipe  
    ###### Variáveis
    CC=arm-none-eabi-gcc
    CFLAGS=-g -mcpu=cortex-m4 -mthumb -O0 -Wall
