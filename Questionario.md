@@ -23,13 +23,13 @@
    De forma generalizada a sintaxe de um “target” é descrita por:
    targets: prerequisites
            	recipe  
-   # Variáveis
+   ###### Variáveis
    CC=arm-none-eabi-gcc
    CFLAGS=-g -mcpu=cortex-m4 -mthumb -O0 -Wall
-   # Regra
+   ###### Regra
    main.o: main.c
 	         $(CC) -c $(CFLAGS) main.c -o main.o
-   # No exemplo acima main.o é o arquivo destino, main.c é o arquivo dependência e $(CC) -c $(CFLAGS) main.c -o main.o é a regra pré-estabelecida.
+   ###### No exemplo acima main.o é o arquivo destino, main.c é o arquivo dependência e $(CC) -c $(CFLAGS) main.c -o main.o é a regra pré-estabelecida.
         
 #### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
 
