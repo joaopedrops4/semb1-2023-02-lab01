@@ -43,6 +43,8 @@
 
 ### (a) Explique o conjunto de instruções ***Thumb*** e suas principais vantagens na arquitetura ARM. Como o conjunto de instruções ***Thumb*** opera em conjunto com o conjunto de instruções ARM?
 
+   O conjunto de instruções Thumb é uma extensão da arquitetura ARM que foi projetada para melhorar a eficiência do código em sistemas com restrições de memória. O conjunto de instruções “thumb” consiste em atuar como um resumo compacto das instruções ARM. Enquanto as instruções ARM possuem 32 bits, uma função “thumb” possui 16 bits.
+
 ### (b) Explique as diferenças entre as arquiteturas ***ARM Load/Store*** e ***Register/Memory***.
 
 ### (c) Os processadores **ARM Cortex-M** oferecem diversos recursos que podem ser explorados por sistemas baseados em **RTOS** (***Real Time Operating Systems***). Por exemplo, a separação da execução do código em níveis de acesso e diferentes modos de operação. Explique detalhadamente como funciona os níveis de acesso de execução de código e os modos de operação nos processadores **ARM Cortex-M**.
