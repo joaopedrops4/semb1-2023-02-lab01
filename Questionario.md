@@ -12,21 +12,38 @@
 
 #### (a) Explique com suas palavras o que é e para que serve o **Makefile**.
 
-  O “makefile” é um conjunto de tarefas que proporciona a utilização do atalho “make”, que é responsável pela automatização do processo de compilação e linkagem de programas. O “makefile” é um tipo de documentação, de forma mais geral pode ser utilizado para diversos tipos de hardware.
+  O “makefile” é um conjunto de tarefas que proporciona a utilização do atalho “make”, que é responsável pela automatização do processo de compilação e linkagem de programas. O “makefile” é um tipo de documentação e de forma mais geral pode ser utilizado para diversos tipos de hardware.
   
 #### (b) Descreva brevemente o processo realizado pelo utilitário **make** para compilar um programa.
 
+  O utilitário “make” é uma ferramenta que automatiza o processo de compilação e construção de programas. Esse utilitário, através de um conjunto de instruções chamado “makefile”, possibilita a execução das regras previamente estabelecidas e assim consegue compilar um programa. 
+
 #### (c) Qual é a sintaxe utilizada para criar um novo **target**?
 
+   De forma generalizada a sintaxe de um “target” é descrita por:
+   targets: prerequisites
+           	recipe  
+   # Variáveis
+   CC=arm-none-eabi-gcc
+   CFLAGS=-g -mcpu=cortex-m4 -mthumb -O0 -Wall
+   # Regra
+   main.o: main.c
+	         $(CC) -c $(CFLAGS) main.c -o main.o
+   # No exemplo acima main.o é o arquivo destino, main.c é o arquivo dependência e $(CC) -c $(CFLAGS) main.c -o main.o é a regra pré-estabelecida.
+        
 #### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
 
+   As dependências de um “target” são definidas após a criação do alvo propriamente dito a partir do operador dois pontos ( : ). As dependências são os arquivos dos quais o alvo depende para ser construído, ou seja, é a partir da dependência que o “make” permite a criação do “target” dado o pré-requisito estabelecido pelo usuário.
+
 #### (e) O que são as regras do **Makefile**, qual a diferença entre regras implícitas e explícitas?
+
+  As regras do “makefile” são as instruções que definem como criar um arquivo destino a partir de certa dependência. As regras explícitas informam ao “make” quais arquivos dependem de outros arquivos, bem como os comandos necessários para compilar um determinado arquivo. Já as regras implícitas informam ao “make” quais são os comandos a serem executados para a compilação do programa como um todo.
 
 ## 4. Sobre a arquitetura **ARM Cortex-M** responda:
 
 ### (a) Explique o conjunto de instruções ***Thumb*** e suas principais vantagens na arquitetura ARM. Como o conjunto de instruções ***Thumb*** opera em conjunto com o conjunto de instruções ARM?
 
-### (b) Explique as diferenças entre as arquiteturas ***ARM Load/Store*** e ***Register/Register***.
+### (b) Explique as diferenças entre as arquiteturas ***ARM Load/Store*** e ***Register/Memory***.
 
 ### (c) Os processadores **ARM Cortex-M** oferecem diversos recursos que podem ser explorados por sistemas baseados em **RTOS** (***Real Time Operating Systems***). Por exemplo, a separação da execução do código em níveis de acesso e diferentes modos de operação. Explique detalhadamente como funciona os níveis de acesso de execução de código e os modos de operação nos processadores **ARM Cortex-M**.
 
