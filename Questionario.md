@@ -6,7 +6,7 @@
    
 ## 2. O que é um código de inicialização ou ***startup*** e qual sua finalidade?
 
-  ﻿O código de inicialização, também conhecido como “startup”, é um conjunto de instruções que são executadas quando um programa começa a rodar. Ele é responsável por configurar o ambiente de execução do programa antes que o código principal seja executado.
+  ﻿O código de inicialização, também conhecido como “startup”, é um conjunto de instruções que são executadas quando um programa começa a rodar. Ele é responsável por configurar o ambiente de execução do programa antes que o código principal seja executado e tem como finalidades: Inicialização do hardware; Carregamento do sistema operacional e Transferência de controle.
    
 ## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
 
@@ -28,7 +28,7 @@
    CFLAGS=-g -mcpu=cortex-m4 -mthumb -O0 -Wall
    ###### Regra
    main.o: main.c
-	         $(CC) -c $(CFLAGS) main.c -o main.o
+           $(CC) -c $(CFLAGS) main.c -o main.o
    ###### No exemplo acima main.o é o arquivo destino, main.c é o arquivo dependência e $(CC) -c $(CFLAGS) main.c -o main.o é a regra pré-estabelecida.
         
 #### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
@@ -59,17 +59,31 @@
 
 ### (e) Qual a diferença entre os registradores **CPSR** (***Current Program Status Register***) e **SPSR** (***Saved Program Status Register***)?
 
+   O registrador CPSR mantém bits de estado que indicam o resultado de operações lógicas e aritméticas, controlam interrupções e o modo de operação do processador enquanto o registrador SPSR está presente apenas em modos de exceção e é usado para guardar o valor de CPSR quando uma exceção associada é chamada. Ou seja, o CPSR é usado para controlar o estado atual do programa enquanto o SPSR é usado para salvar o estado do programa durante uma interrupção ou exceção.
+
 ### (f) Qual a finalidade do **LR** (***Link Register***)?
+
+   O “Link Register” é um registrador que tem a função de armazenar o enndereço de retorno quando uma chamada de sub-rotina é concluída. A sua finalidade consiste em permitir chamadas mais rápidas para sub-rotinas e em casos de exceção, ele faz com que o endereço de retorno seja empurrado para a pilha através do hardware.
 
 ### (g) Qual o propósito do Program Status Register (PSR) nos processadores ARM?
 
+   O PSR é um registrador que permite indicar o resultado de operações lógicas e aritméticas, controlam interrupções e o modo de operação do processador. Ele é dividido em: APSR(Application Program Status Register) que são flags utilizadas como operações de instrução; ISPR(Interrupt Program Status Register) que indicam a exceção de interrupção processada e ESPR(Execution Program Status Register) que controlam a operação de certas instruções.
+
 ### (h) O que é a tabela de vetores de interrupção?
+
+   A tabela de vetores de interrupção é uma tabela de endereços de memória que apontam para as rotinas de tratamento de interrupções. Quando uma interrupção é gerada o processador salva o seu estado atual e começa a executar o tratamento de interrupção apontado pelo vetor, o que garante que nenhuma das tarefas executadas pelo sistema operacional entrem em conflito.
 
 ### (i) Qual a finalidade do NVIC (**Nested Vectored Interrupt Controller**) nos microcontroladores ARM e como ele pode ser utilizado em aplicações de tempo real?
 
+   O NVIC é um controlador de interrupções presente nos microcontroladores ARM e tem como funcionalidades a manipulação de interrupções, a resposta rápida com baixa latência e a configuração personalizada das interrupções. Em aplicações de tempo real, o NVIC permite que o sistema responda rapidamente a eventos de interrupção, o que é crucial para manter o desempenho em tempo real do microcontrolador. Além disso, a capacidade de priorizar interrupções permite que os desenvolvedores garantam que as tarefas mais críticas sejam atendidas primeiro.
+
 ### (j) Em modo de execução normal, o Cortex-M pode fazer uma chamada de função usando a instrução **BL**, que muda o **PC** para o endereço de destino e salva o ponto de execução atual no registador **LR**. Ao final da função, é possível recuperar esse contexto usando uma instrução **BX LR**, por exemplo, que atualiza o **PC** para o ponto anterior. No entanto, quando acontece uma interrupção, o **LR** é preenchido com um valor completamente  diferente,  chamado  de  **EXC_RETURN**.  Explique  o  funcionamento  desse  mecanismo  e especifique como o **Cortex-M** consegue fazer o retorno da interrupção. 
 
+   O mecanismo *EXC_RETURN* é um valor especial carregado pelo “Link Register” usado quando uma interrupção ocorre em um processador ARM Cortex-M. Este valor não é um endereço de retorno, mas sim um valor que contém informações sobre o estado do processador antes da interrupção. Dito isso, o *EXC_RETURN* permite que o processador interrompa uma execução normal do programa para tratar uma interrupção e, e seguida, retorne ao programa exatamente de onde ocorreu a parada.
+
 ### (k) Qual  a  diferença  no  salvamento  de  contexto,  durante  a  chegada  de  uma  interrupção,  entre  os processadores Cortex-M3 e Cortex M4F (com ponto flutuante)? Descreva em termos de tempo e também de uso da pilha. Explique também o que é ***lazy stack*** e como ele é configurado. 
+
+  No Cortex-M3 quando uma interrupção ocorre o processador salva automaticamente o estado do programa incluindo 8 registradores e o *EXC_RETURN* do “Link Register” caso haja mudanças na pilha enquanto no Cortex-M4F, o suporte a ponto flutuante permite que o processador salve automaticamente o estado do programa porém incluindo 26 registradores, o que pode levar mais tempo e usar mais espaço na pilha que o Cortex-M3. Já o *Lazy Stack* é um recurso do Cortex-M4F que ajuda a otimizar o uso da pilha e o tempo de interrupções, os registradores só são empilhados se forem usados durante a execução da rotina de tratamento de interrupção. Para configurar o *Lazy Stack* é necessário habilitar o bit FPCA(Floating-Point Context Active) no registrador de controle, onde esse bit é usado para indicar se o contexto do ponto flutuante está ativo, assim, permitindo que o processador empilhe os registradores caso haja ocorrência de interrupção.
 
 
 ## Referências
