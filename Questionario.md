@@ -47,9 +47,15 @@
 
 ### (b) Explique as diferenças entre as arquiteturas ***ARM Load/Store*** e ***Register/Memory***.
 
+   A arquitetura ARM Load/Store é uma arquitetura do tipo RISC(Reduced Instruction Set Computing), que utiliza um modelo de acesso à memória baseado em carregamento e armazenamento. Nessa arquitetura, apenas instruçoes de carregamento(load) e armazenamento(store) podem acessar a memória. Já a arquitetura ARM Register/Memory é uma arquitetura do tipo CISC(Complex Instruction Set Computing) que permite um dos operandos operar na memória enquanto o outro opera no registrador, ou seja, permite que as operações ocorram diretamente na memória.
+
 ### (c) Os processadores **ARM Cortex-M** oferecem diversos recursos que podem ser explorados por sistemas baseados em **RTOS** (***Real Time Operating Systems***). Por exemplo, a separação da execução do código em níveis de acesso e diferentes modos de operação. Explique detalhadamente como funciona os níveis de acesso de execução de código e os modos de operação nos processadores **ARM Cortex-M**.
 
+   Os processadores ARM Cortex-M possuem dois níveis de acesso e dois modos de operação. Para os níveis de acesso: Nível de Acesso Privilegiado(PAL) é quando o código é executado em um nível que proporciona acesso total aos recursos do processador e aos registradores restritos; Nível de Acesso Sem-Privilégios(NPAL) é quando o código não tem acesso aos registradores restritos do sistema. Para os modos de operação: Modo Thread é o modo onde o processador pode operar em ambos os níveis de acesso, PAL e NPAL; Modo Handler é quando o processador sempre opera no nível de acesso PAL.
+
 ### (d) Explique como os processadores ARM tratam as exceções e as interrupções. Quais são os diferentes tipos de exceção e como elas são priorizadas? Descreva a estratégia de **group priority** e **sub-priority** presente nesse processo.
+
+   Os processadores ARM tratam exceções e interrupões de maneira eficiente e versátil. Quando ocorre uma exceção ou interrupção, a execução faz a transição do modo usuário para o modo kernel onde a exceção ou interrupção é tratada, e também, o processador entra no modo Handler quando ocorre uma exceção. As interrupções são caracterizadas entre FIQ(Fast Interrupt Request) e IRQ(Interrupt Request)
 
 ### (e) Qual a diferença entre os registradores **CPSR** (***Current Program Status Register***) e **SPSR** (***Saved Program Status Register***)?
 
